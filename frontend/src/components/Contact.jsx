@@ -10,8 +10,8 @@ const Contact = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(
+    await axios
+      .post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/message/send`,
         {
           name,
@@ -23,20 +23,17 @@ const Contact = () => {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
-      );
-      toast.success(res.data.message);
-      setName("");
-      setEmail("");
-      setMessage("");
-      setSubject("");
-    } catch (error) {
-      console.error(error); // Log the entire error object
-      if (error.response && error.response.data && error.response.data.message) {
+      )
+      .then((res) => {
+        toast.success(res.data.message);
+        setName("");
+        setEmail("");
+        setMessage("");
+        setSubject("");
+      })
+      .catch((error) => {
         toast.error(error.response.data.message);
-      } else {
-        toast.error("An unexpected error occurred. Please try again.");
-      }
-    }
+      });
   };
 
   return (

@@ -17,7 +17,9 @@ app.use(express.urlencoded({extended:true}));
 
 app.use("/api/v1/message",messageRouter);
 
-
+app.get("/health", (req, res) => {
+    res.status(200).send("Server is running");
+});
 app.listen(process.env.PORT, () => {
     console.log(`Server listening at port ${process.env.PORT}`);
 });
