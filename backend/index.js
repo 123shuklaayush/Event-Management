@@ -7,10 +7,9 @@ const app = express();
 
 dotenv.config();
 dbConnect();
-// Give access to all the frontend urls
 const corsOptions = {
-    origin: "*",
-    optionsSuccessStatus: 200
+    origin: ["http://localhost:5173", "https://event-management-nine-fawn.vercel.app"],
+    methods: "POST"
 }
 app.use(cors(corsOptions));
 app.use(express.json());
