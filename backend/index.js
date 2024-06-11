@@ -6,10 +6,20 @@ import cors from "cors"
 const app = express();
 
 dotenv.config();
-app.use(cors());
+dbConnect();
+const corsOptions = {
+    origin: [`${process.env.FRONTEND_URL}`],
+    credentials: true, 
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.use("/api/v1/message",messageRouter);
-dbConnect();
+
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server listening at port ${process.env.PORT}`);
+});
+
 export default app;
