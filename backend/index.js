@@ -11,7 +11,8 @@ const corsOptions = {
     origin: ["http://localhost:5173", "https://event-management-nine-fawn.vercel.app", 
         "https://event-management-cmih.onrender.com/api/v1/message/send"
     ],
-    methods: "POST"
+    methods: "POST",
+    credentials: true,
 }
 app.use(cors(corsOptions));
 app.use(express.json());
